@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Professional IMDb title page creation & listing by Bengal Solution Point. Independent service — not affiliated with IMDb."/>
+<title>IMDb Listing | Bengal Solution Point</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#050508;--surface:#0c0c12;--card:rgba(18,18,28,0.75);--border:rgba(255,255,255,0.07);
+  --text:#f2f2f7;--muted:#8a8a9e;--accent:#f5c518;--accent2:#8b5cf6;--glow:rgba(245,197,24,0.4);
+  --success:#22c55e;--whatsapp:#25d366;--radius:18px;--font:'Inter',system-ui,sans-serif;--display:'Space Grotesk',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;min-height:100vh}
+/* Ambient 3D mesh */
+.bg-mesh{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.bg-mesh span{position:absolute;border-radius:50%;filter:blur(80px);opacity:.35;animation:orb 18s ease-in-out infinite}
+.bg-mesh span:nth-child(1){width:420px;height:420px;background:#f5c518;top:-10%;left:-5%;animation-delay:0s}
+.bg-mesh span:nth-child(2){width:360px;height:360px;background:#8b5cf6;top:40%;right:-8%;animation-delay:-6s}
+.bg-mesh span:nth-child(3){width:300px;height:300px;background:#3b82f6;bottom:-5%;left:30%;animation-delay:-12s}
+@keyframes orb{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(30px,-40px) scale(1.08)}66%{transform:translate(-20px,20px) scale(0.95)}}
+.container{width:min(1140px,92%);margin:0 auto;position:relative;z-index:1}
+a{color:inherit;text-decoration:none;transition:.25s}
+ul{list-style:none}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.9rem 1.85rem;font-weight:600;font-size:.95rem;border-radius:50px;border:none;cursor:pointer;transition:.35s cubic-bezier(.4,0,.2,1)}
+.btn-primary{background:linear-gradient(135deg,#f5c518,#eab308);color:#0a0a0f;box-shadow:0 4px 28px var(--glow),inset 0 1px 0 rgba(255,255,255,0.25)}
+.btn-primary:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 10px 40px var(--glow)}
+.btn-outline{background:rgba(255,255,255,0.03);border:1px solid var(--border);color:var(--text);backdrop-filter:blur(12px)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent);background:rgba(245,197,24,0.06);transform:translateY(-2px)}
+.btn-whatsapp{background:linear-gradient(135deg,#25d366,#16a34a);color:#fff;box-shadow:0 4px 24px rgba(37,211,102,0.35)}
+.btn-whatsapp:hover{transform:translateY(-2px)}
+.btn.full{width:100%}
+.btn-add{background:rgba(139,92,246,0.12);color:#c4b5fd;border:1px dashed rgba(139,92,246,0.4);width:100%;margin-top:.5rem;padding:.65rem;border-radius:12px;cursor:pointer;font-weight:600;font-size:.9rem}
+.btn-add:hover{background:rgba(139,92,246,0.22)}
+
+/* NAV */
+.navbar{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1rem 0;background:rgba(5,5,8,0.65);backdrop-filter:blur(24px) saturate(1.5);border-bottom:1px solid transparent;transition:.3s}
+.navbar.scrolled{border-bottom-color:var(--border);padding:.65rem 0;background:rgba(5,5,8,0.88)}
+.nav-container{display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:.4rem;font-family:var(--display);font-weight:700;font-size:1.3rem}
+.logo-imdb{background:linear-gradient(135deg,#f5c518,#eab308);color:#0a0a0f;padding:.2rem .55rem;border-radius:7px;font-size:1.05rem;box-shadow:0 2px 12px var(--glow)}
+.nav-links{display:flex;align-items:center;gap:1.5rem}
+.nav-links a{font-size:.88rem;font-weight:500;color:var(--muted)}
+.nav-links a:hover{color:var(--accent)}
+.btn-nav{background:linear-gradient(135deg,#f5c518,#eab308)!important;color:#0a0a0f!important;padding:.48rem 1.15rem!important;border-radius:50px!important;font-weight:600!important}
+.nav-imdb-link{display:inline-flex;align-items:center;gap:.35rem;font-size:.85rem!important;border:1px solid var(--border);padding:.38rem .85rem;border-radius:50px}
+.nav-imdb-link:hover{color:var(--accent)!important;border-color:rgba(245,197,24,0.45)}
+.visitor-pill{display:inline-flex;align-items:center;gap:.4rem;background:rgba(245,197,24,0.1);border:1px solid rgba(245,197,24,0.25);color:var(--accent);font-size:.75rem;font-weight:600;padding:.3rem .75rem;border-radius:50px;font-variant-numeric:tabular-nums}
+.visitor-pill i{font-size:.7rem}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px}
+.hamburger span{width:24px;height:2px;background:var(--text);border-radius:2px}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:7.5rem 0 4rem;position:relative}
+.hero-content{max-width:700px}
+.hero-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(139,92,246,0.14);color:#c4b5fd;font-size:.8rem;font-weight:600;padding:.42rem 1rem;border-radius:50px;border:1px solid rgba(139,92,246,0.28);margin-bottom:1.5rem;animation:float 4s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+.hero h1{font-family:var(--display);font-size:clamp(2.5rem,5.5vw,3.9rem);font-weight:700;line-height:1.1;margin-bottom:1.2rem;letter-spacing:-1.5px}
+.highlight{background:linear-gradient(135deg,#f5c518,#fde047);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:1.08rem;color:var(--muted);max-width:560px;margin-bottom:1.5rem}
+.hero-cta{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:1.75rem}
+.warning-bar{display:flex;align-items:flex-start;gap:.75rem;background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.28);border-radius:14px;padding:1rem 1.15rem;max-width:560px;font-size:.85rem;color:#fbbf24;line-height:1.45}
+.warning-bar i{margin-top:2px;flex-shrink:0}
+.warning-bar strong{color:#fcd34d}
+
+.section{padding:5rem 0}
+.section-header{text-align:center;max-width:600px;margin:0 auto 3rem}
+.section-tag{display:inline-block;font-size:.72rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:1.8px;margin-bottom:.7rem}
+.section-header h2{font-family:var(--display);font-size:clamp(1.75rem,3.5vw,2.35rem);font-weight:700;margin-bottom:.55rem;letter-spacing:-.5px}
+.section-header p{color:var(--muted);font-size:1.02rem}
+
+.glass{background:var(--card);backdrop-filter:blur(20px) saturate(1.2);border:1px solid var(--border);border-radius:var(--radius);transition:.4s cubic-bezier(.4,0,.2,1);box-shadow:0 4px 24px rgba(0,0,0,0.25)}
+.glass:hover{border-color:rgba(245,197,24,0.28);transform:translateY(-6px);box-shadow:0 24px 56px rgba(0,0,0,0.45),0 0 0 1px rgba(245,197,24,0.12)}
+
+/* BANNER */
+.imdb-banner{position:relative;border-radius:22px;overflow:hidden;border:1px solid var(--border);margin-bottom:2.5rem}
+.imdb-banner-bg{position:absolute;inset:0;background:linear-gradient(135deg,rgba(5,5,8,0.94),rgba(12,12,20,0.9)),radial-gradient(ellipse 70% 80% at 15% 50%,rgba(245,197,24,0.2),transparent),radial-gradient(ellipse 50% 60% at 85% 30%,rgba(139,92,246,0.18),transparent);z-index:0}
+.imdb-banner-content{position:relative;z-index:1;padding:3rem 2rem;text-align:center;max-width:740px;margin:0 auto}
+.imdb-banner-badge{display:inline-flex;align-items:center;gap:.4rem;background:rgba(34,197,94,0.12);color:#86efac;font-size:.78rem;font-weight:600;padding:.35rem .9rem;border-radius:50px;border:1px solid rgba(34,197,94,0.28);margin-bottom:1.1rem}
+.imdb-banner-content h2{font-family:var(--display);font-size:clamp(1.55rem,3.5vw,2.15rem);font-weight:700;margin-bottom:.7rem}
+.imdb-banner-content p{color:var(--muted);font-size:.97rem;margin-bottom:1.5rem;line-height:1.55}
+.imdb-banner-cta{display:flex;flex-wrap:wrap;gap:.85rem;justify-content:center}
+
+.trend-tabs{display:flex;justify-content:center;gap:.65rem;margin-bottom:2rem;flex-wrap:wrap}
+.trend-tab{padding:.55rem 1.35rem;border-radius:50px;border:1px solid var(--border);background:rgba(255,255,255,0.03);color:var(--muted);font-weight:600;font-size:.88rem;cursor:pointer;transition:.25s;font-family:var(--font)}
+.trend-tab.active,.trend-tab:hover{background:linear-gradient(135deg,rgba(245,197,24,0.16),rgba(139,92,246,0.1));border-color:rgba(245,197,24,0.4);color:var(--accent)}
+.trend-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:1.15rem}
+.trend-card{display:block;color:inherit;overflow:hidden}
+.trend-poster{aspect-ratio:2/3;position:relative;overflow:hidden;background:#111}
+.trend-poster img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.trend-card:hover .trend-poster img{transform:scale(1.07)}
+.trend-rank{position:absolute;top:10px;left:10px;z-index:2;background:rgba(0,0,0,0.8);color:var(--accent);font-weight:800;font-size:.82rem;font-family:var(--display);padding:.2rem .5rem;border-radius:6px}
+.trend-visit{position:absolute;bottom:10px;right:10px;z-index:2;background:rgba(245,197,24,0.95);color:#0a0a0f;font-size:.65rem;font-weight:700;padding:.2rem .5rem;border-radius:6px;opacity:0;transition:.25s;display:flex;align-items:center;gap:.25rem}
+.trend-card:hover .trend-visit{opacity:1}
+.trend-info{padding:.85rem .9rem}
+.trend-info h4{font-size:.9rem;margin-bottom:.12rem;font-family:var(--display);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.trend-info span{font-size:.72rem;color:var(--muted)}
+.trend-meta{margin-top:.3rem;font-size:.78rem;color:var(--accent);display:flex;align-items:center;gap:.3rem}
+.trend-note{text-align:center;margin-top:1.75rem;color:var(--muted);font-size:.88rem}
+
+.pricing{background:rgba(12,12,18,0.5)}
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:1.1rem}
+.price-card{padding:1.65rem;text-align:center;position:relative}
+.price-card.popular{border-color:rgba(245,197,24,0.45);background:linear-gradient(180deg,rgba(245,197,24,0.1),var(--card))}
+.popular-badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#f5c518,#eab308);color:#0a0a0f;font-size:.66rem;font-weight:700;padding:.22rem .8rem;border-radius:50px}
+.price-header h3{font-size:1.05rem;margin-bottom:.3rem;font-family:var(--display)}
+.price-for{color:var(--muted);font-size:.76rem;margin-bottom:.9rem}
+.price-amount{font-size:1.85rem;font-weight:800;color:var(--accent);margin-bottom:1.1rem;font-family:var(--display);letter-spacing:-1px}
+.note-48{background:rgba(245,197,24,0.08);border:1px solid rgba(245,197,24,0.22);border-radius:14px;padding:1rem 1.2rem;text-align:center;margin-top:1.5rem;color:var(--accent);font-weight:500;font-size:.92rem}
+
+.steps{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.step{flex:1;min-width:160px;text-align:center;padding:1.4rem 1rem}
+.step-num{font-size:2.4rem;font-weight:800;font-family:var(--display);background:linear-gradient(135deg,rgba(245,197,24,0.35),rgba(139,92,246,0.25));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;margin-bottom:.9rem}
+.step h3{font-size:1.05rem;margin-bottom:.4rem;font-family:var(--display)}
+.step p{color:var(--muted);font-size:.86rem}
+.step-arrow{display:flex;align-items:center;color:var(--border);font-size:1.1rem;padding-top:2.2rem}
+@media(max-width:900px){.step-arrow{display:none}.steps{flex-direction:column;align-items:center}.step{max-width:300px}}
+
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1.2rem}
+.gallery-poster{aspect-ratio:2/3;display:flex;align-items:center;justify-content:center;font-size:2.2rem;color:rgba(255,255,255,0.18)}
+.gallery-info{padding:.9rem 1rem}
+.gallery-info h4{font-size:.92rem;margin-bottom:.12rem;font-family:var(--display)}
+.gallery-info span{font-size:.75rem;color:var(--muted)}
+
+.testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.2rem}
+.testimonial-card{padding:1.75rem}
+.stars{color:var(--accent);font-size:.95rem;margin-bottom:.9rem;letter-spacing:2px}
+.testimonial-card>p{color:var(--muted);font-size:.95rem;margin-bottom:1.3rem;font-style:italic}
+.client{display:flex;align-items:center;gap:.85rem}
+.client-avatar{width:42px;height:42px;background:linear-gradient(135deg,rgba(245,197,24,0.2),rgba(139,92,246,0.15));color:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem}
+.client strong{display:block;font-size:.92rem}
+.client span{font-size:.76rem;color:var(--muted)}
+
+.submit-section{background:rgba(12,12,18,0.45)}
+.project-form{padding:2.1rem;max-width:840px;margin:0 auto}
+.form-section-title{font-size:.95rem;font-weight:600;color:var(--accent);margin:1.6rem 0 .9rem;padding-bottom:.45rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:.45rem;font-family:var(--display)}
+.form-section-title:first-of-type{margin-top:0}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+.form-group{margin-bottom:1.05rem}
+.form-group label{display:block;font-size:.82rem;font-weight:500;color:var(--muted);margin-bottom:.35rem}
+.form-group input,.form-group select,.form-group textarea{width:100%;padding:.72rem .95rem;background:rgba(5,5,8,0.7);border:1px solid var(--border);border-radius:12px;color:var(--text);font-family:inherit;font-size:.92rem;transition:.25s}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(245,197,24,0.12)}
+.form-group textarea{resize:vertical;min-height:75px}
+.cast-list{display:flex;flex-direction:column;gap:.55rem}
+.cast-item{display:grid;grid-template-columns:1fr 1fr auto;gap:.5rem;align-items:center}
+.cast-item input{width:100%;padding:.65rem .85rem;background:rgba(5,5,8,0.7);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:.9rem}
+.cast-item .remove-cast{background:rgba(239,68,68,0.12);color:#f87171;border:none;width:36px;height:36px;border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.file-upload{border:2px dashed var(--border);border-radius:14px;padding:1.4rem;text-align:center;cursor:pointer;transition:.25s;background:rgba(5,5,8,0.4)}
+.file-upload:hover{border-color:var(--accent);background:rgba(245,197,24,0.04)}
+.file-upload i{font-size:1.6rem;color:var(--muted);margin-bottom:.4rem}
+.file-upload p{color:var(--muted);font-size:.88rem}
+.file-upload input{display:none}
+.file-name{margin-top:.4rem;font-size:.82rem;color:var(--accent)}
+.form-note{margin-top:1rem;font-size:.82rem;color:var(--muted);text-align:center}
+
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(10px);z-index:2000;display:none;align-items:center;justify-content:center;padding:1.5rem}
+.modal-overlay.active{display:flex}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:22px;padding:2.2rem;max-width:420px;width:100%;position:relative;box-shadow:0 30px 90px rgba(0,0,0,0.55);animation:slideUp .35s cubic-bezier(.4,0,.2,1)}
+@keyframes slideUp{from{opacity:0;transform:translateY(28px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+.modal-close{position:absolute;top:1rem;right:1rem;background:rgba(255,255,255,0.06);border:none;color:var(--muted);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center}
+.modal h2{font-family:var(--display);font-size:1.4rem;margin-bottom:.4rem;text-align:center}
+.modal-sub{color:var(--muted);font-size:.9rem;text-align:center;margin-bottom:1.5rem}
+.modal-price{background:linear-gradient(135deg,rgba(245,197,24,0.12),rgba(139,92,246,0.08));border:1px solid rgba(245,197,24,0.25);border-radius:14px;padding:1rem;text-align:center;font-weight:700;color:var(--accent);font-size:1.25rem;font-family:var(--display);margin-bottom:1.3rem}
+.modal-qr{background:#fff;border-radius:14px;padding:1.3rem;display:flex;justify-content:center;margin-bottom:1.2rem}
+.qr-box{width:170px;height:170px;border:2px dashed #ccc;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#666;gap:.35rem}
+.qr-box i{font-size:2.8rem;color:#999}
+.modal-upi{display:flex;align-items:center;gap:.5rem;background:rgba(5,5,8,0.6);padding:.7rem 1rem;border-radius:12px;margin-bottom:1.2rem;font-size:.9rem}
+.modal-upi span{color:var(--muted)}.modal-upi strong{flex:1}
+.copy-btn{background:none;border:none;color:var(--muted);cursor:pointer;padding:4px}
+.modal-support{text-align:center;margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid var(--border)}
+.modal-support p{color:var(--muted);font-size:.85rem;margin-bottom:.4rem}
+.modal-support a{color:var(--accent);font-weight:600;font-size:1.05rem}
+.modal-note{background:rgba(245,197,24,0.08);border:1px solid rgba(245,197,24,0.2);border-radius:12px;padding:.75rem;text-align:center;margin-top:1rem;color:var(--accent);font-size:.82rem;font-weight:500}
+.modal-warn{background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.3);border-radius:12px;padding:.7rem;text-align:center;margin-top:.75rem;color:#fbbf24;font-size:.78rem}
+
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.2rem}
+.contact-card{padding:1.75rem;text-align:center}
+.contact-card i{font-size:1.6rem;color:var(--accent);margin-bottom:.9rem}
+.contact-card h4{font-size:.95rem;margin-bottom:.4rem;font-family:var(--display)}
+.contact-card a,.contact-card p{color:var(--muted);font-size:.92rem}
+.contact-card a:hover{color:var(--accent)}
+
+.footer{background:#030306;border-top:1px solid var(--border);padding:3.2rem 0 1.8rem;position:relative;z-index:1}
+.footer-top{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:2.2rem;margin-bottom:2.2rem}
+.footer-brand p{color:var(--muted);font-size:.88rem;margin-top:.9rem;max-width:320px}
+.footer-brand .unit{font-size:.72rem;color:rgba(245,197,24,0.7);letter-spacing:1.5px;text-transform:uppercase;margin-top:.5rem}
+.footer-links h4{font-size:.9rem;margin-bottom:.9rem;font-family:var(--display)}
+.footer-links a{display:block;color:var(--muted);font-size:.88rem;margin-bottom:.45rem}
+.footer-links a:hover{color:var(--accent)}
+.footer-bottom{border-top:1px solid var(--border);padding-top:1.4rem;text-align:center}
+.footer-bottom p{color:var(--muted);font-size:.82rem;margin-bottom:.35rem}
+.footer-bottom a{color:var(--accent)}
+.footer-bottom a:hover{text-decoration:underline}
+.disclaimer{font-size:.72rem!important;opacity:.7;max-width:640px;margin-left:auto;margin-right:auto;line-height:1.5}
+
+@media(max-width:900px){.footer-top{grid-template-columns:1fr;gap:1.8rem}.form-row{grid-template-columns:1fr}.cast-item{grid-template-columns:1fr 1fr auto}}
+@media(max-width:768px){.hamburger{display:flex}.nav-links{position:fixed;top:0;right:-100%;width:min(290px,82%);height:100vh;background:var(--surface);flex-direction:column;align-items:flex-start;padding:5rem 1.8rem 2rem;gap:1.3rem;border-left:1px solid var(--border);transition:right .3s}.nav-links.open{right:0}.hero-cta{flex-direction:column}.hero-cta .btn{width:100%}.cast-item{grid-template-columns:1fr;gap:.4rem}.visitor-pill{display:none}.nav-imdb-link{order:10}}
+@media(max-width:480px){.section{padding:3.5rem 0}.price-amount{font-size:1.6rem}.modal{padding:1.6rem}}
+</style>
+</head>
+<body>
+<div class="bg-mesh" aria-hidden="true"><span></span><span></span><span></span></div>
+
+<nav class="navbar" id="navbar">
+  <div class="container nav-container">
+    <a href="#home" class="logo"><span class="logo-imdb">IMDb</span><span>Listing</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#trending">Examples</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#submit" class="btn-nav">Submit Project</a></li>
+      <li><a href="https://www.imdb.com" target="_blank" rel="noopener" class="nav-imdb-link"><i class="fas fa-external-link-alt"></i> Visit IMDb</a></li>
+      <li><span class="visitor-pill" title="Site visitors"><i class="fas fa-eye"></i> <span id="visitorCount">18,860</span></span></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<section id="home" class="hero">
+  <div class="container hero-content">
+    <div class="hero-badge"><i class="fas fa-sparkles"></i> Title Page + IMDb Listing</div>
+    <h1>Get Your Project<br/><span class="highlight">Listed on IMDb</span></h1>
+    <p class="hero-sub">Professional title page creation & IMDb listing for Feature Films, Short Films, Web Series, Documentaries, Music Albums & Ad Films. Ready within 48 hours after advance.</p>
+    <div class="hero-cta">
+      <a href="#submit" class="btn btn-primary">Submit Your Project</a>
+      <a href="#pricing" class="btn btn-outline">View Charges</a>
+      <a href="https://www.imdb.com" target="_blank" rel="noopener" class="btn btn-outline"><i class="fas fa-external-link-alt"></i> Visit IMDb.com</a>
+    </div>
+    <div class="warning-bar">
+      <i class="fas fa-exclamation-triangle"></i>
+      <div><strong>Important:</strong> This is an <strong>independent listing assistance service</strong> by Bengal Solution Point. We are <strong>not affiliated with, endorsed by, or part of IMDb / Amazon</strong>. We help prepare & submit title data professionally.</div>
+    </div>
+  </div>
+</section>
+
+<section id="trending" class="section">
+  <div class="container">
+    <div class="imdb-banner">
+      <div class="imdb-banner-bg"></div>
+      <div class="imdb-banner-content">
+        <div class="imdb-banner-badge"><i class="fas fa-check-circle"></i> Professional Listing Service</div>
+        <h2>Your Project. <span class="highlight">IMDb Presence.</span></h2>
+        <p>We create complete title pages so your film, series or album can appear on IMDb like major Indian & Hollywood titles. Click any example below to see a live IMDb page.</p>
+        <div class="imdb-banner-cta">
+          <a href="#submit" class="btn btn-primary">List Your Project</a>
+          <a href="https://www.imdb.com" target="_blank" rel="noopener" class="btn btn-outline"><i class="fas fa-external-link-alt"></i> Open IMDb.com</a>
+        </div>
+      </div>
+    </div>
+    <div class="section-header">
+      <span class="section-tag">See How Listing Looks</span>
+      <h2>Bollywood · Hollywood · Tollywood</h2>
+      <p>Real IMDb title pages — click a poster to open the live listing.</p>
+    </div>
+    <div class="trend-tabs">
+      <button type="button" class="trend-tab active" data-tab="bollywood">Bollywood</button>
+      <button type="button" class="trend-tab" data-tab="hollywood">Hollywood</button>
+      <button type="button" class="trend-tab" data-tab="tollywood">Tollywood</button>
+    </div>
+    <div class="trend-grid" id="trendBollywood">
+<a class="glass trend-card" href="https://www.imdb.com/title/tt15354916/" target="_blank" rel="noopener">
+        <div class="trend-poster"><span class="trend-rank">01</span><img src="https://upload.wikimedia.org/wikipedia/en/3/39/Jawan_film_poster.jpg" alt="Jawan" loading="lazy" onerror="this.style.opacity=0"/><span class="trend-visit"><i class="fas fa-external-link-alt"></i> IMDb</span></div>
+        <div class="trend-info"><h4>Jawan</h4><span>Action · India</span><div class="trend-meta"><i class="fas fa-star"></i> 7.1 · 2023</div></div>
+      </a>
+<a class="glass trend-card" href="https://www.imdb.com/title/tt12844910/" target="_blank" rel="noopener">
+        <div class="trend-poster"><span class="trend-rank">02</span><img src="https://upload.wikimedia.org/wikipedia/en/c/c3/Pathaan_film_poster.jpg" alt="Pathaan" loading="lazy" onerror="this.style.opacity=0"/><span class="trend-visit"><i class="fas fa-external-link-alt"></i> IMDb</span></div>
+        <div class="trend-info"><h4>Pathaan</h4><span>Action · India</span><div class="trend-meta"><i class="fas fa-star"></i> 6.9 · 2023</div></div>
+      </a>
+<a class="glass trend-card" href="https://www.imdb.com/title/tt13751694/" target="_blank" rel="noopener">
+        <div class="trend-poster"><span class="trend-rank">03</span><img src="https://m.media-amazon.com/images/M/MV5BZThmNDg1NjUtNWJhMC00YjA3LWJiMjItNmM4ZDQ5ZGZiN2Y2XkEyXkFqcGc@._V1_QL75_UY562_CR35,0,380,562_.jpg" alt="Animal" loading="lazy" onerror="this.style.opacity=0"/><span class="trend-visit"><i class="fas fa-external-link-alt"></i> IMDb</span></div>
+        <div class="trend-info"><h4>Animal</h4><span>Drama · India</span><div class="trend-meta"><i class="fas fa-star"></i> 6.8 · 2023</div></div>
+      </a>
+<a class="glass trend-card" href="https://www.imdb.com/title/tt26937157/" target="_blank" rel="noopener">
+        <div class="trend-poster"><span class="trend-rank">04</span><img src="https://upload.wikimedia.org/wikipedia/en/f/f2/12th_Fail_poster.jpeg" alt="12th Fail" loading="lazy" onerror="this.style.opacity=0"/><span class="trend-visit"><i class="fas fa-external-link-alt"></i> IMDb</span></div>
+        <div class="trend-info"><h4>12th Fail</h4><span>Drama · India</span><div class="trend-meta"><i class="fas fa-star"></i> 8.8 · 2023</div></div>
+      </a>
+<a class="glass trend-card" href="https://www.imdb.com/title/tt22053534/" target="_blank" rel="noopener">
+        <div class="trend-poster"><span class="trend-rank">05</span><img src="https://upload.wikimedia.org/wikipedia/en/4/4c/Kalki_2898_AD.jpg" alt="Kalki 2898 AD" loading="lazy" onerror="this.style.opacity=0"/><span class="trend-visit"><i class="fas fa-external-link-alt"></i> IMDb</span></div>
+        <div class="trend-info"><h4>Kalki 2898 AD</h4><span>Sci-Fi · India</span><div class="trend-meta"><i class="fas fa-star"></i> 7.0 · 2024</div></div>
+      </a>
+<a class="glass trend-card" href="https://www.imdb.com/title/tt27501039/" target="_blank" rel="noopener">
+        <div class="trend-poster"><span class="trend-rank">06</span><img src="https://upload.wikimedia.org/wikipedia/en/a/a1/Stree_2.jpg" alt="Stree 2" loading="lazy" onerror="this.style.opacity=0"/><span class="trend-visit"><i class="fas fa-external-link-alt"></i> IMDb</span></div>
+        <div class="trend-info"><h4>Stree 2</h4><span>Horror Comedy · India</span><div class="trend-meta"><i class="fas fa-star"></i> 7.2 · 2024</div></div>
+      </a>
+</div>
+<div class="trend-grid" id="trendHollywood" style="display:none">
+<a class="glass trend-card" href="https://www.imdb.com/title/tt15398776/" target="_blank" rel="noopener">
+        <div class="trend-poster"><span class="trend-rank">01</span><img src="https://upload.wikimedia.org/wikipedia/en/4/4a/Oppenheimer_%28film%29.jpg" alt="Oppenheimer" loading="lazy" onerror="this.style.opacity=0"/><span class="trend-visit"><i class="fas fa-external-link-alt"></i> IMDb</span></div>
+        <div class="trend-info"><h4>Oppenheimer</h4><span>Biography · USA</span><div class="trend-meta"><i class="fas fa-star"></i> 8.3 · 2023</div></div>
+      </a>
+<a class="glass trend-card" href="https://www.imdb.com/title/tt1517268/" target="_blank" rel="noopener">
+        <div class="trend-poster"><span class="trend-rank">02</span><img src="https://upload.wikimedia.org/wikipedia/en/0/0b/Barbie_2023_poster.jpg" alt="Barbie" loading="lazy" onerror="this.style.opacity=0"/><span class="trend-visit"><i class="fas fa-external-link-alt"></i> IMDb</span></div>
+        <div class="trend-info"><h4>Barbie</h4><span>Comedy · USA</span><div class="trend-meta"><i class="fas fa-star"></i> 6.9 · 2023</div></div>
+      </a>
+<a class="glass trend-card" href="https://www.imdb.com/title/tt15239678/" target="_blank" rel="noopener">
+        <div class="trend-poster"><span class="trend-rank">03</span><img src="https://upload.wikimedia.org/wikipedia/en/5/52/Dune_Part_Two_poster.jpeg" alt="Dune: Part Two" loading="lazy" onerror="this.style.opacity=0"/><span class="trend-visit"><i class="fas fa-external-link-alt"></i> IMDb</span></div>
+        <div class="trend-info"><h4>Dune: Part Two</h4><span>Sci-Fi · USA</span><div class="trend-meta"><i class="fas fa-star"></i> 8.5 · 2024</div></div>
+      </a>
+<a class="glass trend-card" href="https://www.imdb.com/title/tt6263850/" target="_blank" rel="noopener">
+        <div class="trend-poster"><span class="trend-rank">04</span><img src="https://upload.wikimedia.org/wikipedia/en/4/4c/Deadpool_%26_Wolverine_poster.jpg" alt="Deadpool & Wolverine" loading="lazy" onerror="this.style.opacity=0"/><span class="trend-visit"><i class="fas fa-external-link-alt"></i> IMDb</span></div>
+        <div class="trend-info"><h4>Deadpool & Wolverine</h4><span>Action · USA</span><div class="trend-meta"><i class="fas fa-star"></i> 7.8 · 2024</div></div>
+      </a>
+<a class="glass trend-card" href="https://www.imdb.com/title/tt1877832/" target="_blank" rel="noopener">
+        <div class="trend-poster"><span class="trend-rank">05</span><img src="https://upload.wikimedia.org/wikipedia/en/f/ff/The_Batman_%28film%29_poster.jpg" alt="The Batman" loading="lazy" onerror="this.style.opacity=0"/><span class="trend-visit"><i class="fas fa-external-link-alt"></i> IMDb</span></div>
+        <div class="trend-info"><h4>The Batman</h4><span>Crime · USA</span><div class="trend-meta"><i class="fas fa-star"></i> 7.8 · 2022</div></div>
+      </a>
+<a class="glass trend-card" href="https://www.imdb.com/title/tt0816692/" target="_blank" rel="noopener">
+        <div class="trend-poster"><span class="trend-rank">06</span><img src="https://upload.wikimedia.org/wikipedia/en/b/bc/Interstellar_film_poster.jpg" alt="Interstellar" loading="lazy" onerror="this.style.opacity=0"/><span class="trend-visit"><i class="fas fa-external-link-alt"></i> IMDb</span></div>
+        <div class="trend-info"><h4>Interstellar</h4><span>Sci-Fi · USA</span><div class="trend-meta"><i class="fas fa-star"></i> 8.7 · 2014</div></div>
+      </a>
+</div>
+<div class="trend-grid" id="trendTollywood" style="display:none">
+<a class="glass trend-card" href="https://www.imdb.com/title/tt8637440/" target="_blank" rel="noopener">
+        <div class="trend-poster"><span class="trend-rank">01</span><img src="https://upload.wikimedia.org/wikipedia/en/d/d7/RRR_Poster.jpg" alt="RRR" loading="lazy" onerror="this.style.opacity=0"/><span class="trend-visit"><i class="fas fa-external-link-alt"></i> IMDb</span></div>
+        <div class="trend-info"><h4>RRR</h4><span>Action · India</span><div class="trend-meta"><i class="fas fa-star"></i> 7.8 · 2022</div></div>
+      </a>
+<a class="glass trend-card" href="https://www.imdb.com/title/tt4849438/" target="_blank" rel="noopener">
+        <div class="trend-poster"><span class="trend-rank">02</span><img src="https://upload.wikimedia.org/wikipedia/en/f/f3/Baahubali_2_The_Conclusion.jpg" alt="Baahubali 2" loading="lazy" onerror="this.style.opacity=0"/><span class="trend-visit"><i class="fas fa-external-link-alt"></i> IMDb</span></div>
+        <div class="trend-info"><h4>Baahubali 2</h4><span>Action · India</span><div class="trend-meta"><i class="fas fa-star"></i> 8.2 · 2017</div></div>
+      </a>
+<a class="glass trend-card" href="https://www.imdb.com/title/tt10739928/" target="_blank" rel="noopener">
+        <div class="trend-poster"><span class="trend-rank">03</span><img src="https://upload.wikimedia.org/wikipedia/en/8/82/Pushpa_2_The_Rule.jpg" alt="Pushpa 2" loading="lazy" onerror="this.style.opacity=0"/><span class="trend-visit"><i class="fas fa-external-link-alt"></i> IMDb</span></div>
+        <div class="trend-info"><h4>Pushpa 2</h4><span>Action · India</span><div class="trend-meta"><i class="fas fa-star"></i> 6.7 · 2024</div></div>
+      </a>
+<a class="glass trend-card" href="https://www.imdb.com/title/tt13927994/" target="_blank" rel="noopener">
+        <div class="trend-poster"><span class="trend-rank">04</span><img src="https://upload.wikimedia.org/wikipedia/en/a/a6/Salaar_poster.jpg" alt="Salaar" loading="lazy" onerror="this.style.opacity=0"/><span class="trend-visit"><i class="fas fa-external-link-alt"></i> IMDb</span></div>
+        <div class="trend-info"><h4>Salaar</h4><span>Action · India</span><div class="trend-meta"><i class="fas fa-star"></i> 6.5 · 2023</div></div>
+      </a>
+</div>
+    <p class="trend-note">Click any card to open the live IMDb title page — this is how professional listing looks.</p>
+  </div>
+</section>
+
+<section id="pricing" class="section pricing">
+  <div class="container">
+    <div class="section-header"><span class="section-tag">IMDb Charges</span><h2>Transparent Pricing</h2><p>Title page ready within 48 hours after advance payment.</p></div>
+    <div class="pricing-grid">
+      <div class="glass price-card"><div class="price-header"><h3>Ad Film</h3><p class="price-for">Commercial / Brand</p></div><div class="price-amount">₹1,300</div><a href="#submit" class="btn btn-outline full" data-type="ad">Select</a></div>
+      <div class="glass price-card"><div class="price-header"><h3>Short Film</h3><p class="price-for">Independent / Festival</p></div><div class="price-amount">₹1,500</div><a href="#submit" class="btn btn-outline full" data-type="short">Select</a></div>
+      <div class="glass price-card"><div class="price-header"><h3>Vertical Series</h3><p class="price-for">Mobile Format</p></div><div class="price-amount">₹1,500</div><a href="#submit" class="btn btn-outline full" data-type="vertical">Select</a></div>
+      <div class="glass price-card"><div class="price-header"><h3>Music Album</h3><p class="price-for">Album / Video</p></div><div class="price-amount">₹1,500</div><a href="#submit" class="btn btn-outline full" data-type="music">Select</a></div>
+      <div class="glass price-card"><div class="price-header"><h3>Documentary</h3><p class="price-for">Feature / Short</p></div><div class="price-amount">₹2,500</div><a href="#submit" class="btn btn-outline full" data-type="documentary">Select</a></div>
+      <div class="glass price-card popular"><div class="popular-badge">Popular</div><div class="price-header"><h3>Web Series</h3><p class="price-for">Full Season</p></div><div class="price-amount">₹3,500</div><a href="#submit" class="btn btn-primary full" data-type="webseries">Select</a></div>
+      <div class="glass price-card popular"><div class="popular-badge">Premium</div><div class="price-header"><h3>Feature Film</h3><p class="price-for">Theatrical / OTT</p></div><div class="price-amount">₹6,000</div><a href="#submit" class="btn btn-primary full" data-type="feature">Select</a></div>
+    </div>
+    <div class="note-48"><i class="fas fa-clock"></i> Title page created within <strong>48 hours</strong> after advance payment.</div>
+  </div>
+</section>
+
+<section id="how-it-works" class="section">
+  <div class="container">
+    <div class="section-header"><span class="section-tag">Process</span><h2>How It Works</h2></div>
+    <div class="steps">
+      <div class="step"><div class="step-num">01</div><h3>Submit Details</h3><p>Fill complete title page form with credits, cast & crew.</p></div>
+      <div class="step-arrow"><i class="fas fa-chevron-right"></i></div>
+      <div class="step"><div class="step-num">02</div><h3>Pay Advance</h3><p>Pay via UPI scanner. Share screenshot on WhatsApp.</p></div>
+      <div class="step-arrow"><i class="fas fa-chevron-right"></i></div>
+      <div class="step"><div class="step-num">03</div><h3>Title Page (48h)</h3><p>We create professional title page within 48 hours.</p></div>
+      <div class="step-arrow"><i class="fas fa-chevron-right"></i></div>
+      <div class="step"><div class="step-num">04</div><h3>Get Listed</h3><p>Receive confirmation + IMDb link when live.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery" class="section" style="background:rgba(12,12,18,0.4)">
+  <div class="container">
+    <div class="section-header"><span class="section-tag">Our Work</span><h2>Recently Listed</h2></div>
+    <div class="gallery-grid">
+      <div class="glass gallery-item"><div class="gallery-poster" style="background:linear-gradient(135deg,#1a1a2e,#16213e)"><i class="fas fa-film"></i></div><div class="gallery-info"><h4>Midnight Echoes</h4><span>Feature · 2025</span></div></div>
+      <div class="glass gallery-item"><div class="gallery-poster" style="background:linear-gradient(135deg,#2d1b4e,#1a0a2e)"><i class="fas fa-clapperboard"></i></div><div class="gallery-info"><h4>The Last Frame</h4><span>Short · 2025</span></div></div>
+      <div class="glass gallery-item"><div class="gallery-poster" style="background:linear-gradient(135deg,#0f3460,#16213e)"><i class="fas fa-tv"></i></div><div class="gallery-info"><h4>City of Shadows</h4><span>Web Series</span></div></div>
+      <div class="glass gallery-item"><div class="gallery-poster" style="background:linear-gradient(135deg,#1b4332,#081c15)"><i class="fas fa-book-open"></i></div><div class="gallery-info"><h4>Rivers of Bengal</h4><span>Doc · 2024</span></div></div>
+      <div class="glass gallery-item"><div class="gallery-poster" style="background:linear-gradient(135deg,#4a1942,#2d0a1e)"><i class="fas fa-music"></i></div><div class="gallery-info"><h4>Monsoon Melodies</h4><span>Music · 2025</span></div></div>
+      <div class="glass gallery-item"><div class="gallery-poster" style="background:linear-gradient(135deg,#3d2c02,#1a1200)"><i class="fas fa-ad"></i></div><div class="gallery-info"><h4>Brand Vision 360</h4><span>Ad Film</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonials" class="section">
+  <div class="container">
+    <div class="section-header"><span class="section-tag">Reviews</span><h2>What Filmmakers Say</h2></div>
+    <div class="testimonials-grid">
+      <div class="glass testimonial-card"><div class="stars">★★★★★</div><p>"Got my short film listed within 10 days. Extremely professional process."</p><div class="client"><div class="client-avatar">AR</div><div><strong>Ananya Roy</strong><span>Director</span></div></div></div>
+      <div class="glass testimonial-card"><div class="stars">★★★★★</div><p>"Full cast & crew credits handled perfectly. Great communication."</p><div class="client"><div class="client-avatar">SK</div><div><strong>Sourav Kundu</strong><span>Producer</span></div></div></div>
+      <div class="glass testimonial-card"><div class="stars">★★★★★</div><p>"Clean listing, proper credits. Thank you BSP!"</p><div class="client"><div class="client-avatar">PD</div><div><strong>Priya Das</strong><span>Filmmaker</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="submit" class="section submit-section">
+  <div class="container">
+    <div class="section-header"><span class="section-tag">Title Page Details</span><h2>Submit Your Project</h2><p>Fill all details. After submit, payment page opens with UPI scanner.</p></div>
+    <form id="projectForm" class="glass project-form">
+      <div class="form-section-title"><i class="fas fa-info-circle"></i> Basic Information</div>
+      <div class="form-group"><label>Project Type *</label>
+        <select id="projectType" name="projectType" required>
+          <option value="">Select type</option>
+          <option value="feature">Feature Film – ₹6,000</option>
+          <option value="webseries">Web Series – ₹3,500</option>
+          <option value="documentary">Documentary – ₹2,500</option>
+          <option value="short">Short Film – ₹1,500</option>
+          <option value="vertical">Vertical Series – ₹1,500</option>
+          <option value="music">Music Album – ₹1,500</option>
+          <option value="ad">Ad Film – ₹1,300</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Project Title *</label><input type="text" id="title" name="title" placeholder="Official title" required/></div>
+      <div class="form-row">
+        <div class="form-group"><label>Country *</label>
+          <select id="country" name="country" required>
+            <option value="">Select</option>
+            <option value="India">India</option><option value="USA">USA</option><option value="UK">UK</option>
+            <option value="Canada">Canada</option><option value="Australia">Australia</option>
+            <option value="Bangladesh">Bangladesh</option><option value="Nepal">Nepal</option>
+            <option value="UAE">UAE</option><option value="Singapore">Singapore</option><option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Language *</label>
+          <select id="language" name="language" required>
+            <option value="">Select</option>
+            <option value="Hindi">Hindi</option><option value="Bengali">Bengali</option><option value="English">English</option>
+            <option value="Tamil">Tamil</option><option value="Telugu">Telugu</option><option value="Malayalam">Malayalam</option>
+            <option value="Kannada">Kannada</option><option value="Marathi">Marathi</option><option value="Gujarati">Gujarati</option>
+            <option value="Punjabi">Punjabi</option><option value="Odia">Odia</option><option value="Assamese">Assamese</option>
+            <option value="Urdu">Urdu</option><option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Color *</label>
+          <select id="color" name="color" required>
+            <option value="">Select</option>
+            <option value="Color">Color</option>
+            <option value="Black and White">Black and White</option>
+            <option value="Color and Black & White">Color and Black & White</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Genre *</label>
+          <select id="genre" name="genre" required>
+            <option value="">Select</option>
+            <option value="Drama">Drama</option><option value="Comedy">Comedy</option><option value="Action">Action</option>
+            <option value="Thriller">Thriller</option><option value="Horror">Horror</option><option value="Romance">Romance</option>
+            <option value="Crime">Crime</option><option value="Mystery">Mystery</option><option value="Sci-Fi">Sci-Fi</option>
+            <option value="Fantasy">Fantasy</option><option value="Adventure">Adventure</option><option value="Documentary">Documentary</option>
+            <option value="Biography">Biography</option><option value="Musical">Musical</option><option value="Family">Family</option>
+            <option value="Animation">Animation</option><option value="Experimental">Experimental</option><option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-section-title"><i class="fas fa-users"></i> Key Credits</div>
+      <div class="form-row">
+        <div class="form-group"><label>Director *</label><input type="text" id="director" name="director" placeholder="Full name" required/></div>
+        <div class="form-group"><label>Writer</label><input type="text" name="writer" placeholder="Full name"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Production Company</label><input type="text" name="production" placeholder="Company name"/></div>
+        <div class="form-group"><label>Distribution</label><input type="text" name="distribution" placeholder="Distributor"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Producer</label><input type="text" name="producer" placeholder="Full name"/></div>
+        <div class="form-group"><label>DOP (Cinematographer)</label><input type="text" name="dop" placeholder="Full name"/></div>
+      </div>
+      <div class="form-group"><label>Editor</label><input type="text" name="editor" placeholder="Full name"/></div>
+      <div class="form-section-title"><i class="fas fa-star"></i> Cast (Artist + Character)</div>
+      <div class="form-group">
+        <label>Artists & Characters</label>
+        <div class="cast-list" id="castList">
+          <div class="cast-item">
+            <input type="text" name="castArtist[]" placeholder="Artist name"/>
+            <input type="text" name="castCharacter[]" placeholder="Character name"/>
+            <button type="button" class="remove-cast" onclick="removeCast(this)"><i class="fas fa-times"></i></button>
+          </div>
+        </div>
+        <button type="button" class="btn-add" onclick="addCast()"><i class="fas fa-plus"></i> Add Artist</button>
+      </div>
+      <div class="form-section-title"><i class="fas fa-film"></i> Production Details</div>
+      <div class="form-row">
+        <div class="form-group"><label>Production Status *</label>
+          <select name="status" required>
+            <option value="">Select</option>
+            <option value="Released">Released</option>
+            <option value="Pre-Production">Pre-Production</option>
+            <option value="Post-Production">Post-Production</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Budget</label><input type="text" name="budget" placeholder="e.g. ₹5,00,000"/></div>
+      </div>
+      <div class="form-group"><label>Running Time</label><input type="text" name="runtime" placeholder="e.g. 120 min"/></div>
+      <div class="form-section-title"><i class="fas fa-image"></i> Poster</div>
+      <div class="form-group">
+        <div class="file-upload" onclick="document.getElementById('poster').click()">
+          <i class="fas fa-cloud-upload-alt"></i>
+          <p>Click to upload poster</p>
+          <p style="font-size:.75rem;opacity:.7">JPG / PNG</p>
+          <div class="file-name" id="posterName"></div>
+        </div>
+        <input type="file" id="poster" name="poster" accept="image/*" onchange="showFileName(this,'posterName')"/>
+      </div>
+      <div class="form-section-title"><i class="fas fa-align-left"></i> Synopsis</div>
+      <div class="form-group"><label>Brief Synopsis *</label><textarea name="synopsis" rows="4" placeholder="2–5 sentences..." required></textarea></div>
+      <div class="form-section-title"><i class="fas fa-user-tie"></i> Additional Crew</div>
+      <div class="form-row">
+        <div class="form-group"><label>Script Supervisor</label><input type="text" name="scriptSupervisor" placeholder="Full name"/></div>
+        <div class="form-group"><label>Makeup Artist</label><input type="text" name="makeup" placeholder="Full name"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Costume Designer</label><input type="text" name="costume" placeholder="Full name"/></div>
+        <div class="form-group"><label>Art Director</label><input type="text" name="artDirector" placeholder="Full name"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Casting Director</label><input type="text" name="castingDirector" placeholder="Full name"/></div>
+        <div class="form-group"><label>Music Director</label><input type="text" name="musicDirector" placeholder="Full name"/></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Production Manager</label><input type="text" name="productionManager" placeholder="Full name"/></div>
+        <div class="form-group"><label>Assistant Director</label><input type="text" name="assistantDirector" placeholder="Full name"/></div>
+      </div>
+      <div class="form-group"><label>Special Thanks</label><textarea name="specialThanks" rows="2" placeholder="Names..."></textarea></div>
+      <div class="form-section-title"><i class="fas fa-link"></i> Links</div>
+      <div class="form-group"><label>Trailer Link</label><input type="url" name="trailer" placeholder="https://youtube.com/..."/></div>
+      <div class="form-group"><label>Teaser Link</label><input type="url" name="teaser" placeholder="https://youtube.com/..."/></div>
+      <div class="form-group"><label>News Articles</label><textarea name="news" rows="2" placeholder="Paste links..."></textarea></div>
+      <div class="form-group"><label>Social Media Posts</label><textarea name="social" rows="2" placeholder="Paste links..."></textarea></div>
+      <div class="form-section-title"><i class="fas fa-address-card"></i> Your Contact</div>
+      <div class="form-row">
+        <div class="form-group"><label>Your Full Name *</label><input type="text" name="name" placeholder="Contact person" required/></div>
+        <div class="form-group"><label>WhatsApp / Phone *</label><input type="tel" name="phone" placeholder="+91 XXXXXXXXXX" required/></div>
+      </div>
+      <div class="form-group"><label>Email *</label><input type="email" name="email" placeholder="you@example.com" required/></div>
+      <button type="submit" class="btn btn-primary full">Submit Project Request</button>
+      <p class="form-note">After submit, payment page opens with UPI scanner. Title page ready in 48 hours after advance.</p>
+    </form>
+  </div>
+</section>
+
+<section id="contact" class="section">
+  <div class="container">
+    <div class="section-header"><span class="section-tag">Contact</span><h2>Get In Touch</h2></div>
+    <div class="contact-grid">
+      <div class="glass contact-card"><i class="fas fa-phone-alt"></i><h4>Phone / WhatsApp</h4><a href="tel:+918981839702">+91 89818 39702</a></div>
+      <div class="glass contact-card"><i class="fas fa-envelope"></i><h4>Email</h4><a href="mailto:bspkolkata.business@gmail.com">bspkolkata.business@gmail.com</a></div>
+      <div class="glass contact-card"><i class="fas fa-building"></i><h4>Company</h4><p>The unit of Bengal Solution Point</p></div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#home" class="logo"><span class="logo-imdb">IMDb</span><span>Listing</span></a>
+        <p>Professional IMDb title page creation & listing assistance by Bengal Solution Point.</p>
+        <div class="unit">A unit of Bengal Solution Point</div>
+      </div>
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <a href="#pricing">Pricing</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#submit">Submit Project</a>
+        <a href="https://www.imdb.com" target="_blank" rel="noopener">Visit IMDb.com</a>
+      </div>
+      <div class="footer-links">
+        <h4>Contact</h4>
+        <a href="tel:+918981839702">+91 89818 39702</a>
+        <a href="mailto:bspkolkata.business@gmail.com">bspkolkata.business@gmail.com</a>
+        <a href="https://bengalsolutionpoint.vercel.app/" target="_blank" rel="noopener">Bengal Solution Point</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 IMDb Listing · A unit of <a href="https://bengalsolutionpoint.vercel.app/" target="_blank" rel="noopener">Bengal Solution Point</a></p>
+      <p class="disclaimer"><strong>Disclaimer:</strong> This is an independent listing assistance service. Not affiliated with, endorsed by, or connected to IMDb, Amazon, or any of their subsidiaries. We help filmmakers prepare and submit title information professionally.</p>
+      <p class="disclaimer">Made with care by <a href="https://bengalsolutionpoint.vercel.app/" target="_blank" rel="noopener">Bengal Solution Point</a></p>
+    </div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="paymentModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closePayment()" aria-label="Close"><i class="fas fa-times"></i></button>
+    <h2>Complete Payment</h2>
+    <p class="modal-sub">Scan UPI QR & share screenshot on WhatsApp</p>
+    <div class="modal-price" id="modalPrice">—</div>
+    <div class="modal-qr"><div class="qr-box"><i class="fas fa-qrcode"></i><span>UPI QR Code</span><small>Replace with your QR</small></div></div>
+    <div class="modal-upi"><span>UPI ID:</span><strong>your-upi@bank</strong><button type="button" class="copy-btn" onclick="copyUpi()"><i class="fas fa-copy"></i></button></div>
+    <a href="https://wa.me/918981839702" class="btn btn-whatsapp full" target="_blank" id="waPaymentBtn"><i class="fab fa-whatsapp"></i> Send Screenshot on WhatsApp</a>
+    <div class="modal-support"><p>Support Number</p><a href="tel:+918981839702"><i class="fas fa-phone-alt"></i> +91 89818 39702</a></div>
+    <div class="modal-note"><i class="fas fa-clock"></i> Title page ready within 48 hours after advance</div>
+    <div class="modal-warn"><i class="fas fa-info-circle"></i> Independent service · Not affiliated with IMDb</div>
+  </div>
+</div>
+
+<script>
+const priceMap={feature:'₹6,000',webseries:'₹3,500',documentary:'₹2,500',short:'₹1,500',vertical:'₹1,500',music:'₹1,500',ad:'₹1,300'};
+const typeLabels={feature:'Feature Film',webseries:'Web Series',documentary:'Documentary',short:'Short Film',vertical:'Vertical Series',music:'Music Album',ad:'Ad Film'};
+
+const navbar=document.getElementById('navbar');
+window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',window.scrollY>40));
+
+const hamburger=document.getElementById('hamburger');
+const navLinks=document.getElementById('navLinks');
+hamburger.addEventListener('click',()=>{navLinks.classList.toggle('open');hamburger.classList.toggle('active')});
+navLinks.querySelectorAll('a').forEach(l=>l.addEventListener('click',()=>{navLinks.classList.remove('open');hamburger.classList.remove('active')}));
+
+document.querySelectorAll('.price-card .btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{const t=btn.getAttribute('data-type');if(t)document.getElementById('projectType').value=t});
+});
+
+function addCast(){
+  const list=document.getElementById('castList');
+  const item=document.createElement('div');
+  item.className='cast-item';
+  item.innerHTML='<input type="text" name="castArtist[]" placeholder="Artist name"/><input type="text" name="castCharacter[]" placeholder="Character name"/><button type="button" class="remove-cast" onclick="removeCast(this)"><i class="fas fa-times"></i></button>';
+  list.appendChild(item);
+}
+function removeCast(btn){
+  const list=document.getElementById('castList');
+  if(list.children.length>1)btn.closest('.cast-item').remove();
+  else btn.closest('.cast-item').querySelectorAll('input').forEach(i=>i.value='');
+}
+function showFileName(input,id){document.getElementById(id).textContent=(input.files&&input.files[0])?input.files[0].name:''}
+
+const form=document.getElementById('projectForm');
+const paymentModal=document.getElementById('paymentModal');
+form.addEventListener('submit',e=>{
+  e.preventDefault();
+  const fd=new FormData(form);
+  const data=Object.fromEntries(fd.entries());
+  const artists=Array.from(form.querySelectorAll('input[name="castArtist[]"]')).map(i=>i.value.trim());
+  const chars=Array.from(form.querySelectorAll('input[name="castCharacter[]"]')).map(i=>i.value.trim());
+  let castStr='';
+  for(let i=0;i<artists.length;i++){if(artists[i])castStr+=`• ${artists[i]}${chars[i]?' as '+chars[i]:''}\n`}
+  if(!castStr)castStr='N/A';
+  const price=priceMap[data.projectType]||'';
+  document.getElementById('modalPrice').textContent=(typeLabels[data.projectType]||data.projectType)+' — '+price;
+  const msg=`Hi, I want to list my project on IMDb.
+
+*PROJECT*
+• Title: ${data.title}
+• Type: ${typeLabels[data.projectType]||data.projectType} (${price})
+• Country: ${data.country} | Language: ${data.language}
+• Color: ${data.color} | Genre: ${data.genre}
+• Status: ${data.status} | Runtime: ${data.runtime||'N/A'}
+• Budget: ${data.budget||'N/A'}
+
+*CREDITS*
+• Director: ${data.director}
+• Writer: ${data.writer||'N/A'}
+• Producer: ${data.producer||'N/A'}
+• Production: ${data.production||'N/A'}
+• Distribution: ${data.distribution||'N/A'}
+• DOP: ${data.dop||'N/A'}
+• Editor: ${data.editor||'N/A'}
+
+*CAST*
+${castStr}
+*CREW*
+• Script Supervisor: ${data.scriptSupervisor||'N/A'}
+• Makeup: ${data.makeup||'N/A'} | Costume: ${data.costume||'N/A'}
+• Art Director: ${data.artDirector||'N/A'}
+• Casting Director: ${data.castingDirector||'N/A'}
+• Music Director: ${data.musicDirector||'N/A'}
+• PM: ${data.productionManager||'N/A'} | AD: ${data.assistantDirector||'N/A'}
+• Special Thanks: ${data.specialThanks||'N/A'}
+
+*SYNOPSIS*
+${data.synopsis}
+
+*LINKS*
+Trailer: ${data.trailer||'N/A'}
+Teaser: ${data.teaser||'N/A'}
+News: ${data.news||'N/A'}
+Social: ${data.social||'N/A'}
+
+*CONTACT*
+${data.name} | ${data.phone} | ${data.email}
+
+I will complete payment and share screenshot.`;
+  document.getElementById('waPaymentBtn').href='https://wa.me/918981839702?text='+encodeURIComponent(msg);
+  paymentModal.classList.add('active');
+  document.body.style.overflow='hidden';
+});
+function closePayment(){paymentModal.classList.remove('active');document.body.style.overflow=''}
+paymentModal.addEventListener('click',e=>{if(e.target===paymentModal)closePayment()});
+function copyUpi(){
+  navigator.clipboard.writeText('your-upi@bank').then(()=>{
+    const b=document.querySelector('.copy-btn');const o=b.innerHTML;b.innerHTML='<i class="fas fa-check"></i>';b.style.color='#22c55e';
+    setTimeout(()=>{b.innerHTML=o;b.style.color=''},1500);
+  }).catch(()=>alert('UPI: your-upi@bank'));
+}
+
+document.querySelectorAll('.trend-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.trend-tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    const w=tab.getAttribute('data-tab');
+    document.getElementById('trendBollywood').style.display=w==='bollywood'?'grid':'none';
+    document.getElementById('trendHollywood').style.display=w==='hollywood'?'grid':'none';
+    document.getElementById('trendTollywood').style.display=w==='tollywood'?'grid':'none';
+  });
+});
+
+/* Visitor counter from 18860 */
+(function(){
+  const KEY='bsp_imdb_visitors';
+  const BASE=18860;
+  let n=parseInt(localStorage.getItem(KEY)||BASE,10);
+  if(isNaN(n)||n<BASE)n=BASE;
+  n+=1;
+  localStorage.setItem(KEY,String(n));
+  const el=document.getElementById('visitorCount');
+  if(el)el.textContent=n.toLocaleString('en-IN');
+})();
+
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)'}});
+},{threshold:0.1,rootMargin:'0px 0px -20px 0px'});
+document.querySelectorAll('.price-card,.testimonial-card,.gallery-item,.step,.trend-card').forEach(el=>{
+  el.style.opacity='0';el.style.transform='translateY(22px)';el.style.transition='opacity .55s ease,transform .55s ease';
+  obs.observe(el);
+});
+</script>
+</body>
+</html>
